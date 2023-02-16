@@ -51,19 +51,16 @@ def train(config, epoch, num_epoch, epoch_iters, base_lr,
 
     for i_iter, batch in enumerate(trainloader, 0):
         images, labels, _, _ = batch
-        # print(torch.unique(labels))
+
         if len(torch.unique(labels)) == 1 and torch.unique(labels)[0] == 255:
-            # print("find it")
             continue
 
         images = images.cuda()
         labels = labels.long().cuda()
-        # print(torch.unique(labels))
+
 
         losses, _ = model(images, labels)
         loss = losses.mean()
-        if i_iter == 799:
-            print("start!")
 
         if dist.is_distributed():
             reduced_loss = reduce_tensor(loss)
@@ -105,6 +102,10 @@ def validate(config, testloader, model, writer_dict):
     with torch.no_grad():
         for idx, batch in enumerate(testloader):
             image, label, _, _ = batch
+
+            if len(torch.unique(label)) == 1 and torch.unique(label)[0] == 255:
+                continue
+
             size = label.size()
             image = image.cuda()
             label = label.long().cuda()
