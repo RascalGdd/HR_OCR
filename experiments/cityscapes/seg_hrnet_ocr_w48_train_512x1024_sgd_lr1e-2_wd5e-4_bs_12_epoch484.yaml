@@ -10,14 +10,14 @@ PRINT_FREQ: 10
 
 DATASET:
   DATASET: cityscapes
-  ROOT: /scratch/diaguo/DD/HR_OCR/
+  ROOT: /scratch_net/biwidl206/diaguo/DD/HR_OCR/
   TEST_SET: 'list/cityscapes/val.lst'
   TRAIN_SET: 'list/cityscapes/train.lst'
   NUM_CLASSES: 19
 MODEL:
   NAME: seg_hrnet_ocr
   NUM_OUTPUTS: 2
-  PRETRAINED: r"/scratch/diaguo/DD/HR_OCR/pretrained_models/hrnetv2_w48_imagenet_pretrained.pth"
+  PRETRAINED: r"/scratch_net/biwidl206/diaguo/DD/HR_OCR/pretrained_models/hrnetv2_w48_imagenet_pretrained.pth"
   EXTRA:
     FINAL_CONV_KERNEL: 1
     STAGE1:
